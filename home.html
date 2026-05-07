@@ -31,8 +31,7 @@
               <span class="navbar__divider">|</span>
               <a href="#">WEATHER</a>
               <span class="navbar__divider">|</span>
-              <!-- <a href="./login.html">SIGN IN</a> -->
-              <a href="./my-account.html">My account</a>
+              <a href="#" id="authLink" data-require-login="./my-account.html" data-require-logout="./login.html">SIGN IN</a>
             </div>
           </div>
 
@@ -205,6 +204,24 @@
       });
     </script>
     <script src="./assets/scripts/weather.js"></script>
+    <script>
+      function updateAuthLink() {
+        const authLink = document.getElementById("authLink");
+        if (!authLink) return;
+
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+        if (isLoggedIn) {
+          authLink.textContent = "My account";
+          authLink.href = authLink.dataset.requireLogin;
+        } else {
+          authLink.textContent = "SIGN IN";
+          authLink.href = authLink.dataset.requireLogout;
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", updateAuthLink);
+    </script>
     <script src="./assets/scripts/footer.js"></script>
   </body>
 </html>

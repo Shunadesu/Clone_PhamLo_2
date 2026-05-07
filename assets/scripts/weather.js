@@ -1,13 +1,15 @@
-// DOM Elements
-const weatherModal = document.getElementById("weatherModal");
-const closeModalBtn = document.getElementById("closeModalBtn");
-const weatherLinks = document.querySelectorAll(".navbar__text-links a");
-const nightOverlay = document.getElementById("nightOverlay");
-const sky = document.querySelector(".sky");
-const weatherEffect = document.querySelector(".weather-effect");
-const pageMain = document.querySelector(".page-main");
-const skyBird = document.querySelector(".sky__birds");
-const floor = document.getElementById("floor");
+// Prevent multiple declarations
+if (typeof weatherModal === "undefined") {
+  // DOM Elements
+  const weatherModal = document.getElementById("weatherModal");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+  const weatherLinks = document.querySelectorAll(".navbar__text-links a");
+  const nightOverlay = document.getElementById("nightOverlay");
+  const sky = document.querySelector(".sky");
+  const weatherEffect = document.querySelector(".weather-effect");
+  const pageMain = document.querySelector(".page-main");
+  const skyBird = document.querySelector(".sky__birds");
+  const floor = document.getElementById("floor");
 
 // ===== Hiệu ứng mưa =====
 function createRain() {
@@ -110,13 +112,12 @@ function applyWeatherState() {
     if (isHomePage) {
       pageMain.classList.remove("page-main--background");
       pageMain.classList.add("page-main--snow");
-      // Chuyển floor sang nền tuyết
       if (floor) {
         floor.classList.remove("page-main__floor");
         floor.classList.add("page-main__floor--snow");
       }
     }
-  }else{
+  } else if (floor) {
     floor.classList.add("page-main__floor");
     floor.classList.remove("page-main__floor--snow");
   }
@@ -183,3 +184,4 @@ weatherModal.addEventListener("click", function (e) {
 window.addEventListener("DOMContentLoaded", () => {
   applyWeatherState();
 });
+}
